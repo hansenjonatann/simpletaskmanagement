@@ -29,6 +29,9 @@ importers:
       '@trpc/server':
         specifier: ^11.0.0
         version: 11.1.2(typescript@5.8.3)
+      bcrypt-ts:
+        specifier: ^7.0.0
+        version: 7.0.0
       next:
         specifier: ^15.2.3
         version: 15.3.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -958,6 +961,10 @@ packages:
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+
+  bcrypt-ts@7.0.0:
+    resolution: {integrity: sha512-JMr30sbKPwF+2TccaNOYJuDx+nCmnTvHGB2rwkj+To/xZhBTX9f8zpTqGy3kpkS26KWOEYPsQlOJ5MVD00RHQQ==}
+    engines: {node: '>=20'}
 
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
@@ -2905,6 +2912,8 @@ snapshots:
   axobject-query@4.1.0: {}
 
   balanced-match@1.0.2: {}
+
+  bcrypt-ts@7.0.0: {}
 
   brace-expansion@1.1.11:
     dependencies:
