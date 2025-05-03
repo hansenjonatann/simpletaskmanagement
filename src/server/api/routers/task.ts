@@ -6,7 +6,7 @@ export const taskRouter = createTRPCRouter({
   get: publicProcedure
     .input(z.object({ userId: z.string() }))
     .query(async ({ input }) => {
-      await db.task.findMany({
+      const tasks = await db.task.findMany({
         where: {
           userId: input.userId,
         },
@@ -14,6 +14,7 @@ export const taskRouter = createTRPCRouter({
           category: true,
         },
       });
+      return tasks ?? [];
     }),
 
   create: publicProcedure
@@ -37,7 +38,7 @@ export const taskRouter = createTRPCRouter({
           due: input.due,
           userId: input.userId,
           categoryId: input.categoryId,
-          status: "UNDONE",
+          status: "TODO",
         },
       });
 
@@ -49,7 +50,7 @@ export const taskRouter = createTRPCRouter({
   changeStatus: publicProcedure
     .input(
       z.object({
-        status: z.enum(["DONE", "UNDONE", "ONGOING"]),
+        status: z.enum(["TODO", "DOING", "DONE"]),
         id: z.string(),
         userId: z.string(),
       }),
@@ -126,26 +127,27 @@ export const taskRouter = createTRPCRouter({
   filterByStatus: publicProcedure
     .input(
       z.object({
-        status: z.enum(["DONE", "UNDONE", "ONGOING"]),
+        status: z.string(),
         userId: z.string(),
       }),
     )
     .query(async ({ input }) => {
-      await db.task.findMany({
+      const tasks = await db.task.findMany({
         where: {
           userId: input.userId,
-          status: input.status,
+          status: input.status as 'TODO' | 'DOING' | 'DONE',
         },
         include: {
           category: true,
         },
       });
+      return tasks
     }),
 
   filterByCategory: publicProcedure
     .input(z.object({ categoryId: z.string(), userId: z.string() }))
     .query(async ({ input }) => {
-      await db.task.findMany({
+      const tasks = await db.task.findMany({
         where: {
           userId: input.userId,
           categoryId: input.categoryId,
@@ -153,6 +155,9 @@ export const taskRouter = createTRPCRouter({
         include: {
           category: true,
         },
-      });
+        
+        
+      } );
+      return tasks
     }),
 });

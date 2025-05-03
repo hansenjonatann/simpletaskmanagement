@@ -54,7 +54,7 @@ model Category {
 
 
 enum Status {
-    DONE 
-    ONGOING 
-    UNDONE
+    TODO
+    DOING
+    DONE
 }

@@ -4,7 +4,7 @@ import { db } from '~/server/db'
 
 export const categoryRouter = createTRPCRouter({
     get: publicProcedure.input(z.object({userId: z.string()})).query(async ({input}) => {
-        const category = await db.category.findMany({
+         const categories = await db.category.findMany({
             where: {
                 userId: input.userId
             },
@@ -13,7 +13,9 @@ export const categoryRouter = createTRPCRouter({
             }
         })
 
-        return category
+        return categories ?? []
+
+      
 
     }),
 
